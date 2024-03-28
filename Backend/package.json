@@ -1,0 +1,21 @@
+{
+  "name": "ekashuunyam",
+  "version": "1.0.0",
+  "description": "API for Ekashuunyam Fest web application",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.2.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
