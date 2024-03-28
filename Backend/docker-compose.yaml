@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  mongo:
+    container_name: mongo_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data:/data/db
+
+  backend:
+    container_name: backend
+    build: .
+    environment:
+      PORT: 8080
+      DATABASE_URL: "mongodb://mongo:27017"
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+
+volumes:
+  mongo:
