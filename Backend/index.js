@@ -4,7 +4,8 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/database.js";
 
 //rotue imports
-import loginRoutes from "./src/routes/login.routes.js";
+import registerRoute from "./src/routes/register.routes.js";
+import loginRoute from "./src/routes/login.routes.js";
 
 // config
 env.config();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 //routes
-app.use("/user/login", loginRoutes);
+app.use("/user/register", registerRoute);
+app.use("/user/login", loginRoute);
 
 app.listen(port, () => console.log(`server running:http://localhost:${port}`));
