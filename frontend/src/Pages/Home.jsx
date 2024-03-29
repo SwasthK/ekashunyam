@@ -53,6 +53,12 @@ const Home = () => {
 
   useEffect(() => {
     const jwtToken = getJwtToken();
+
+    if (!jwtToken) {
+      navigate("/");
+      return;
+    }
+
     const checkAuthentication = async () => {
       try {
         const response = await axios.post("/api/verifyToken", null, {
