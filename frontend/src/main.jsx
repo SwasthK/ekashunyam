@@ -9,18 +9,18 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import Home from "./components/Home/Home";
-import Credentials from "./components/Credentials/Credentials";
-import Registration from "./components/Fest_Reg/Registration";
-import ErrorRoute from "./components/ErrorComponent/ErrorRoute";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import GlobalError from "./Pages/GlobalError";
+import Registration from "./Pages/FestRegistration";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     [
       <Route path="/" element={<Home />} />,
-      <Route path="/credentials" element={<Credentials />} />,
+      <Route path="/login" element={<Login />} />,
       <Route path="/register" element={<Registration />} />,
-      <Route path="*" element={<ErrorRoute />} />,
+      <Route path="*" element={<GlobalError />} />,
     ],
   ])
 );
