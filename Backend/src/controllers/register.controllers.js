@@ -2,29 +2,23 @@ import { User } from "../models/user.model.js";
 import { createToken } from "../utils/authentication.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
+import { asyncHanlder } from "../utils/asyncHandler.js";
 
-const handleRegistration = async (req, res) => {
+const handleRegistration = asyncHanlder(async (req, res) => {
   const { email, password, collegeName } = req.body;
   if (!(email && password && collegeName)) {
-    res
-      .status(402)
-      .json(new ApiError(402, "Please provide all the credentials"));
-    return;
+    throw new ApiError(402, "Please provide all the credentials");
   }
 
   let isEmailAlreadyExist = {};
   try {
     isEmailAlreadyExist = await User.findOne({ email: email });
   } catch (error) {
-    res
-      .status(500)
-      .json(new ApiError(500, "duplicate email validation error", error));
-    return;
+    throw new ApiError(500, "duplicate email validation error", error);
   }
 
   if (isEmailAlreadyExist) {
-    res.status(409).json(new ApiError(409, "Email already exist"));
-    return;
+    throw new ApiError(409, "Email already exist");
   }
 
   let user;
@@ -42,8 +36,7 @@ const handleRegistration = async (req, res) => {
     );
     if (!user) throw new Error("Server Error occured during creation of user"); //throwing error incase user creation is unsuccessfull
   } catch (error) {
-    res.status(500).json(new ApiError(500, "user creation  error", error));
-    return;
+    throw new ApiError(500, "user creation error");
   }
 
   const token = createToken(user);
@@ -55,6 +48,6 @@ const handleRegistration = async (req, res) => {
       // secure: true,     // ! turn on when https availble
     })
     .json(new ApiResponse(201, user, "Registraion complete", token)); // Remove token in production
-};
+});
 
 export { handleRegistration };

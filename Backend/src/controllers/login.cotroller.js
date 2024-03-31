@@ -3,12 +3,12 @@ import { createToken } from "../utils/authentication.js";
 import { VerifyHashedPassword } from "../utils/hashing.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { ApiError } from "../utils/apiError.js";
+import { asyncHanlder } from "../utils/asyncHandler.js";
 
-const handleLogin = async (req, res) => {
+const handleLogin = asyncHanlder(async (req, res) => {
   const { email, password } = req.body;
   if (!(email && password)) {
-    res.status(402).json(new ApiError(402, "Provide all credentials !!"));
-    return;
+    throw new ApiError(402, "Provide all credentials !!");
   }
   let user = {};
   // retrieving only necessary info
@@ -18,14 +18,11 @@ const handleLogin = async (req, res) => {
       { email: 1, collegeName: 1, password: 1 }
     );
   } catch (error) {
-    res
-      .status(500)
-      .json(new ApiError(500, "Error occured when querying db", error));
+    throw new ApiError(500, "Error occured when querying db", error);
   }
 
   if (!user || !(await VerifyHashedPassword(password, user.password))) {
-    res.status(401).json(new ApiError(401, "Invalid credentials"));
-    return;
+    throw new ApiError(401, "Invalid  credentials");
   }
 
   const token = createToken(user);
@@ -38,6 +35,6 @@ const handleLogin = async (req, res) => {
       secure: true,
     })
     .json(new ApiResponse(200, user, "Logged in successfully", token)); // remove token in production
-};
+});
 
 export { handleLogin };
