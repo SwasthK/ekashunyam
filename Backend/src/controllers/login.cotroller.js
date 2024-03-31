@@ -10,9 +10,13 @@ const handleLogin = async (req, res) => {
     res.status(402).json(new ApiError(402, "Provide all credentials !!"));
     return;
   }
-  let user;
+  let user = {};
+  // retrieving only necessary info
   try {
-    user = await User.findOne({ email: email });
+    user = await User.findOne(
+      { email: email },
+      { email: 1, collegeName: 1, password: 1 }
+    );
   } catch (error) {
     res
       .status(500)
@@ -25,36 +29,15 @@ const handleLogin = async (req, res) => {
   }
 
   const token = createToken(user);
-
-  user.password = undefined;
+  user.password = undefined; // hiding the password
   res
     .status(200)
-    .cookie("jwtToken", token, {
-      expires: new Date(Date.now() + 7), // Expires in 7 Days
+    .cookie("accessToken", token, {
+      expires: new Date(Date.now() + 7), // ! Expires in 7 Days
       httpOnly: true,
-      //  secure: true,               // ! turn on when https availble
+      secure: true,
     })
     .json(new ApiResponse(200, user, "Logged in successfully", token)); // remove token in production
 };
 
 export { handleLogin };
-
-//     .json({
-//       sucesss: httpStatusCodes[200],
-//       message: "Logged in successfully",
-//       data: user,
-//       token: token, // Incase of unavailability of accessing cookies
-//       isAuth: true,
-//     });
-
-// res.status(401).json({
-//   sucess: httpStatusCodes[401],
-//   message: "Invalid credentials!!",
-//   isAuth: false,
-// });
-
-//  res.status(402).json({
-//    sucess: httpStatusCodes[402],
-//    message: "Provide all credentials!!",
-//    isAuth: false,
-//  });

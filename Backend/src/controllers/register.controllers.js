@@ -27,49 +27,34 @@ const handleRegistration = async (req, res) => {
     return;
   }
 
-  let user = {};
+  let user;
   try {
-    user = await User.create({
+    const newUser = await User.create({
       email: email.toLowerCase().trim(),
       password: password.trim(),
       collegeName,
     });
+
+    // retrieving only necessary information
+    user = await User.findOne(
+      { email: newUser.email },
+      { email: 1, collegeName: 1 }
+    );
+    if (!user) throw new Error("Server Error occured during creation of user"); //throwing error incase user creation is unsuccessfull
   } catch (error) {
     res.status(500).json(new ApiError(500, "user creation  error", error));
     return;
   }
 
   const token = createToken(user);
-  user.password = undefined;
-
   res
     .status(201)
-    .cookie("jwtToken", token, {
-      expires: new Date(Date.now() + 7), // Expires in 7 Days
+    .cookie("accessToken", token, {
+      expires: new Date(Date.now() + 7), // !Expires in 7 Days
       httpOnly: true,
-      // ! secure: true,  turn on when https availble
+      // secure: true,     // ! turn on when https availble
     })
     .json(new ApiResponse(201, user, "Registraion complete", token)); // Remove token in production
 };
 
 export { handleRegistration };
-
-// res
-//   .status(201)
-//   .cookie("jwtToken", token, {
-//     expires: new Date(Date.now() + 7), // Expires in 7 Days
-//     httpOnly: true,
-//   })
-//   .json({
-//     sucesss: httpStatusCodes[201],
-//     message: "registration complete",
-//     data: user,
-//     token: token, // Incase of unavailability of accessing cookies
-//     isAuth: true,
-//   });
-//};
-
-// res.status(402).json({
-//   sucesss: httpStatusCodes[402],
-//   message: "Please provide all the credentials",
-// });
