@@ -3,11 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import toast, { Toaster } from 'react-hot-toast';
 
-function useSignin() {
+function useSubmit() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
-    const signinverify = async ({ email, password }) => {
+    const formverify = async ({ email, password }) => {
         const pass = errhandle(email, password);
         setLoading(true);
 
@@ -56,7 +56,7 @@ function useSignin() {
         }
     };
 
-    return { loading, signinverify };
+    return { loading, formverify };
 }
 
 function errhandle(email, password) {
@@ -81,4 +81,4 @@ function errhandle(email, password) {
     return true;
 }
 
-export default useSignin;
+export default useSubmit;

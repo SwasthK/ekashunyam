@@ -43,51 +43,51 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import getJwtToken from "@/utils/getJwtToken";
 import { useNavigate } from "react-router-dom";
 import Button from "@/components/HomePage/Buttons/Button";
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setloading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const jwtToken = getJwtToken();
-
-    if (!jwtToken) {
-      navigate("/");
-      return;
-    }
-
-    const checkAuthentication = async () => {
-      try {
-        const response = await axios.post("/api/verifyToken", null, {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        });
-        if (!response.data.authorized) {
-          setIsAuthenticated(false);
-        } else {
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        console.error("Error in authorizing:", error);
-        setIsAuthenticated(false);
-      }
-    };
-    checkAuthentication();
-  }, []);
+  // useEffect(() => {
+  //   const checkAuthentication = async () => {
+  //     try {
+  //       const response = await axios.get("/user/verifyToken", {
+  //         validateStatus: function (status) {
+  //           return status < 500;
+  //         },
+  //       });
+  //       if (!response.data.authorized ) {
+  //         console.log(response.data.message);
+  //         setIsAuthenticated(false);
+  //       } else {
+  //         setIsAuthenticated(true);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error in authorizing:", error.message);
+  //       setIsAuthenticated(false);
+  //     } finally {
+  //       setloading(false);
+  //     }
+  //   };
+  //   checkAuthentication();
+  // }, []);
 
   return (
     <>
       <div className="bg-sky-500 h-screen flex border-2 flex-col items-center gap-20 p-10 justify-center">
         <h1 className="text-8xl">Home Page</h1>
-        {isAuthenticated ? (
+
+        {/* {loading ? (
+          <p>Loading...</p>
+        ) : isAuthenticated ? (
           <Button text={"Edit"} click={"/register"}></Button>
         ) : (
           <Button text={"Register"} click={"/login"}></Button>
-        )}
+        )} */}
+
+        <Button text={"Register"} click={"/login"}></Button>
       </div>
     </>
   );
