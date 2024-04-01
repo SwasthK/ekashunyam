@@ -3,9 +3,9 @@ import { createToken } from "../utils/authentication.js";
 import { VerifyHashedPassword } from "../utils/hashing.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { ApiError } from "../utils/apiError.js";
-import { asyncHanlder } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const handleLogin = asyncHanlder(async (req, res) => {
+const handleLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!(email && password)) {
     throw new ApiError(402, "Provide all credentials !!");
@@ -30,7 +30,7 @@ const handleLogin = asyncHanlder(async (req, res) => {
   res
     .status(200)
     .cookie("accessToken", token, {
-      expires: new Date(Date.now() + 7), // ! Expires in 7 Days
+      maxAge: 7 * 24 * 60 * 60 * 1000, // ! Expires in 7 Days
       httpOnly: true,
       secure: true,
     })
