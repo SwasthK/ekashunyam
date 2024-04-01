@@ -2,9 +2,9 @@ import { User } from "../models/user.model.js";
 import { createToken } from "../utils/authentication.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
-import { asyncHanlder } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const handleRegistration = asyncHanlder(async (req, res) => {
+const handleRegistration = asyncHandler(async (req, res) => {
   const { email, password, collegeName } = req.body;
   if (!(email && password && collegeName)) {
     throw new ApiError(402, "Please provide all the credentials");
@@ -43,7 +43,7 @@ const handleRegistration = asyncHanlder(async (req, res) => {
   res
     .status(201)
     .cookie("accessToken", token, {
-      expires: new Date(Date.now() + 7), // !Expires in 7 Days
+      maxAge: 7 * 24 * 60 * 60 * 1000, // !Expires in 7 Days
       httpOnly: true,
       // secure: true,     // ! turn on when https availble
     })
