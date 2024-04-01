@@ -6,6 +6,7 @@ import connectDB from "./config/database.js";
 //rotue imports
 import registerRoute from "./src/routes/register.routes.js";
 import loginRoute from "./src/routes/login.routes.js";
+import verifyTokenRoute from "./src/routes/verifyToken.routes.js";
 
 // config
 env.config();
@@ -23,7 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 //routes
-app.use("/user/register", registerRoute);
-app.use("/user/login", loginRoute);
+app.use("/api/user/register", registerRoute);
+app.use("/api/user/login", loginRoute);
+app.use("/api/user/verify", verifyTokenRoute);
 
 app.listen(port, () => console.log(`server running:http://localhost:${port}`));

@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { ApiError } from "./apiError.js";
 const secretKey = process.env.jwtsecretKey || "for deocker only";
 function createToken(user) {
   return jwt.sign({ id: user._id, mail: user.email }, secretKey, {
@@ -11,7 +12,7 @@ function verifyToken(token) {
   try {
     return jwt.verify(token, secretKey);
   } catch (error) {
-    console.log("Error occured while verifying token :", error);
+    throw new ApiError(401, "Invalid token");
   }
 }
 
