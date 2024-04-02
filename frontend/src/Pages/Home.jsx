@@ -87,7 +87,7 @@ const Home = () => {
           <Button text={"Register"} click={"/login"}></Button>
         )} */}
 
-        <Button text={"Register"} click={"/login"}></Button>
+        <Button text={"Register"} click={"/register"}></Button>
       </div>
     </>
   );

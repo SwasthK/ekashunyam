@@ -15,13 +15,13 @@ const Registration = () => {
   //       const response = await axios.get("/user/verifyToken");
   //       console.log(response);
   //       if (!response.data.authorized) {
-  //         navigate("/");
+  //         navigate("/login");
   //       } else {
   //         setAuthenticated(true);
   //       }
   //     } catch (error) {
   //       console.error("Error in authorizing:", error);
-  //       navigate("/");
+  //       navigate("/login");
   //     } finally {
   //       setloading(false);
   //     }

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import useSignup from "@/Hooks/useSignup";
-import { useSubmit } from "react-router-dom";
+import useSubmit from "@/Hooks/useSubmit";
 
 const Form = () => {
   const { loading, formverify } = useSubmit();
@@ -20,7 +19,6 @@ const Form = () => {
         { name: "", number: "" },
       ],
     },
-    
   });
 
   const handlesubmit = (e) => {
@@ -35,8 +33,8 @@ const Form = () => {
         ...formFields[event],
         participants: formFields[event].participants.map((participant, i) =>
           i === index ? { ...participant, [field]: value } : participant
-        )
-      }
+        ),
+      },
     });
   };
 
