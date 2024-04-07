@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import getJwtToken from "@/utils/getJwtToken";
+import Form from "@/components/FesRegistration/Form";
+// import getJwtToken from "@/utils/getJwtToken";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    const jwtToken = getJwtToken();
-    
-    if (!jwtToken) {
-      navigate("/");
-      return;
-    }
-
     const checkAuthentication = async () => {
       try {
-        const response = await axios.post("/api/verifyToken", null, {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        });
+        const response = await axios.get("/user/verifyToken");
+        console.log(response);
         if (!response.data.authorized) {
-          navigate("/");
-          return;
+          navigate("/login");
         } else {
           setAuthenticated(true);
         }
       } catch (error) {
         console.error("Error in authorizing:", error);
-        navigate("/");
+        navigate("/login");
+      } finally {
+        setloading(false);
       }
     };
     checkAuthentication();
-  }, [navigate]);
+  }, []);
 
-  return authenticated ? <div className="festreg">Registration</div> : null;
+  return (
+    <>
+      {loading ? (
+        <p>Loading...</p>
+      ) : authenticated ? (
+        <Form />
+      ) : (
+        navigate("/login")
+      )}
+    </>
+  );
 };
 
 export default Registration;

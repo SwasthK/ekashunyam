@@ -3,12 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import toast, { Toaster } from 'react-hot-toast';
 
-function useSignin() {
+function useSubmit() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
-    const signinverify = async ({ email, password }) => {
-        const pass = errhandle(email, password);
+    const formverify = async (formFields, setFormFields) => {
+        const pass = errhandle(formFields);
         setLoading(true);
 
         if (!pass) {
@@ -17,15 +17,11 @@ function useSignin() {
         }
 
         try {
-            const response = await axios.post('/user/login', {
-                email,
-                password,
-            });
-            console.log(response.data.sucess);
+            const response = await axios.post('/user/register', { formFields });
 
             if (response.status === 201) {
-                console.log(response.data);
-                navigate('/register')
+                alert("Form submitted successfully")
+                navigate('/')
             } else {
                 // Handle error status codes
                 switch (response.status) {
@@ -40,45 +36,44 @@ function useSignin() {
                     default:
                         throw new Error('Error: ' + response.data.message)
                 }
-                // navigate('/register')
+                return;
             }
         } catch (error) {
             console.log(error.message);
             if (error.response && error.response.data) {
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
                 console.log(error.response.data.message);
             } else {
-                toast.error(error.message);
+                // toast.error(error.message);
                 console.log(error.message);
             }
         } finally {
             setLoading(false);
         }
-    };
-
-    return { loading, signinverify };
+    }
+    return { loading, formverify };
 }
 
-function errhandle(email, password) {
-    if (!email || !password) {
-        // toast.error("Enter all details");
-        console.log("enter all details");
-        return false;
+const errhandle = (formFields) => {
+    for (const eventId in formFields) {
+        const event = formFields[eventId];
+        for (const participant of event.participants) {
+            if (participant.name.trim() === "" || participant.contact.trim() === "") {
+                console.log("Empty value not allowed");
+                return false;
+            }
+            if (participant.name.trim() === "" || !/^[a-zA-Z0-9]+$/.test(participant.name)) {
+                console.log("Name is not valid");
+                return false;
+            }
+            if (participant.contact.trim() === "" || !/^\d{10}$/.test(participant.contact)) {
+                console.log("Contact is not valid");
+                return false;
+            }
+        }
     }
+    return true
+};
 
-    if (password.length < 6) {
-        // toast.error("Password should have at least 6 characters");
-        console.log("6 char must");
-        return false;
-    }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        // toast.error("Enter a valid email address");
-        console.log("not an email");
-        return false;
-    }
-    return true;
-}
-
-export default useSignin;
+export default useSubmit;

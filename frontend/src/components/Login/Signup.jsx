@@ -1,5 +1,4 @@
 import useSignup from "@/Hooks/useSignup";
-import useSignin from "@/Hooks/useSignin";
 import React, { useState } from "react";
 import Signin from "./Signin";
 
@@ -22,7 +21,7 @@ const Signup = () => {
   return (
     <>
       {!loginmode ? (
-        <form onSubmit={handlesignup} className="max-w-sm mx-auto flex-col s">
+        <form onSubmit={handlesignup} className="max-w-sm mx-auto flex-cols">
           <div className="mb-5">
             <label
               htmlFor="email"
@@ -33,6 +32,7 @@ const Signup = () => {
             <input
               type="text"
               id="text"
+              value={signupcontent.college}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               placeholder="Enter your college name"
               //   required
@@ -53,6 +53,7 @@ const Signup = () => {
               id="email"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               placeholder="Enter your email"
+              value={signupcontent.email}
               //   required
               onChange={(e) =>
                 setsignupcontent({ ...signupcontent, email: e.target.value })
@@ -71,6 +72,7 @@ const Signup = () => {
               id="password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               placeholder="Enter your password"
+              value={signupcontent.password}
               //   required
               onChange={(e) =>
                 setsignupcontent({ ...signupcontent, password: e.target.value })
@@ -89,6 +91,7 @@ const Signup = () => {
               id="repeat-password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               placeholder="Confirm password"
+              value={signupcontent.confirmpassword}
               //   required
               onChange={(e) =>
                 setsignupcontent({

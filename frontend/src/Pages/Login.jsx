@@ -1,10 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Signup from "@/components/Login/Signup";
 
 const Login = () => {
-  const navigate = useNavigate();
 
   return (
     <>
