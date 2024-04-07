@@ -42,7 +42,6 @@
 // export default Home;
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "@/components/HomePage/Buttons/Button";
 
@@ -50,6 +49,9 @@ const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setloading] = useState(true);
   const navigate = useNavigate();
+
+  //-------------- if needed to check authentication---------------------
+
   // useEffect(() => {
   //   const checkAuthentication = async () => {
   //     try {
