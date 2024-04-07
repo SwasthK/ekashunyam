@@ -9,35 +9,35 @@ const Registration = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setloading] = useState(true);
 
-  // useEffect(() => {
-  //   const checkAuthentication = async () => {
-  //     try {
-  //       const response = await axios.get("/user/verifyToken");
-  //       console.log(response);
-  //       if (!response.data.authorized) {
-  //         navigate("/login");
-  //       } else {
-  //         setAuthenticated(true);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error in authorizing:", error);
-  //       navigate("/login");
-  //     } finally {
-  //       setloading(false);
-  //     }
-  //   };
-  //   checkAuthentication();
-  // }, []);
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get("/user/verifyToken");
+        console.log(response);
+        if (!response.data.authorized) {
+          navigate("/login");
+        } else {
+          setAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Error in authorizing:", error);
+        navigate("/login");
+      } finally {
+        setloading(false);
+      }
+    };
+    checkAuthentication();
+  }, []);
 
   return (
     <>
-      {/* {loading ? (
+      {loading ? (
         <p>Loading...</p>
-      ) : authenticated ? ( */}
+      ) : authenticated ? (
         <Form />
-      {/* ) : (
-        <div>not reg</div>
-      )} */}
+      ) : (
+        navigate("/login")
+      )}
     </>
   );
 };
