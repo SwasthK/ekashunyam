@@ -12,11 +12,12 @@ const Registration = () => {
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
-        const response = await axios.get("/user/verifyToken");
+        const response = await axios.get("/api/user/verify");
         console.log(response);
-        if (!response.data.authorized) {
+        if (!response.data.success) {
           navigate("/login");
         } else {
+          console.log("valid");
           setAuthenticated(true);
         }
       } catch (error) {
@@ -27,7 +28,7 @@ const Registration = () => {
       }
     };
     checkAuthentication();
-  }, []);
+  });
 
   return (
     <>
