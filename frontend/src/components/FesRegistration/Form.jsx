@@ -173,6 +173,7 @@ const Form = () => {
 
   return (
     <div>
+      {loading && <p>Loading...</p>}
       <h1 className="text-center text-4xl">Fest registration form</h1>
       <form
         onSubmit={handleSubmit}

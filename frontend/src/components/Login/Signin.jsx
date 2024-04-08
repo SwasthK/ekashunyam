@@ -18,7 +18,9 @@ const Signin = () => {
 
   return (
     <>
-      {loginmode ? (
+      {loading ? (
+        <div>Loading...</div>
+      ) : loginmode ? (
         <form onSubmit={handlesignin} className="max-w-sm mx-auto flex-col s">
           <div className="mb-5">
             <label

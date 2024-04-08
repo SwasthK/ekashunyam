@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import "./index.css";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 import {
   RouterProvider,
@@ -16,7 +17,7 @@ import Login from "./Pages/Login";
 import GlobalError from "./Pages/GlobalError";
 import Registration from "./Pages/FestRegistration";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter(
@@ -33,6 +34,6 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <RouterProvider router={router} />
-    <ToastContainer />
+    <Toaster />
   </>
 );
