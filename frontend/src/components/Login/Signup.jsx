@@ -2,6 +2,14 @@ import useSignup from "@/Hooks/useSignup";
 import React, { useState } from "react";
 import Signin from "./Signin";
 
+const colleges = [
+  "College A",
+  "College B",
+  "College C",
+  "College D",
+  "College E",
+];
+
 const Signup = () => {
   const { loading, signupverify } = useSignup();
   const [loginmode, setloginmode] = useState(false);
@@ -20,7 +28,9 @@ const Signup = () => {
 
   return (
     <>
-      {!loginmode ? (
+      {loading ? (
+        <div>Loading...</div>
+      ) : !loginmode ? (
         <form onSubmit={handlesignup} className="max-w-sm mx-auto flex-cols">
           <div className="mb-5">
             <label
@@ -29,17 +39,21 @@ const Signup = () => {
             >
               Your college name
             </label>
-            <input
-              type="text"
-              id="text"
+            <select
+              id="college"
               value={signupcontent.college}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              placeholder="Enter your college name"
-              //   required
               onChange={(e) =>
                 setsignupcontent({ ...signupcontent, college: e.target.value })
               }
-            />
+            >
+              <option value="">Select your college</option>
+              {colleges.map((college, index) => (
+                <option key={index} value={college}>
+                  {college}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="mb-5">
             <label
