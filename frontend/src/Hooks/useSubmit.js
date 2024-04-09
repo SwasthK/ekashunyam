@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function useSubmit() {
     const [loading, setLoading] = useState(false);
@@ -17,36 +17,18 @@ function useSubmit() {
         }
 
         try {
-            const response = await axios.post('/user/register', { formFields });
+            const response = await axios.post('api/user/register', { formFields });
 
-            if (response.status === 201) {
-                alert("Form submitted successfully")
+            if (response.data.success) {
+                toast.success("Form submitted successfully")
                 navigate('/')
             } else {
-                // Handle error status codes
-                switch (response.status) {
-                    case 404:
-                        toast.error(response.data.message);
-                        console.log('Error 404: ' + response.data.message);
-                        break;
-                    case 409:
-                        toast.error(response.data.message);
-                        console.log('Error 409: ' + response.data.message);
-                        break;
-                    default:
-                        throw new Error('Error: ' + response.data.message)
-                }
-                return;
+                toast.error("Error in submitting the form");
+                console.log(response.data.message);
             }
         } catch (error) {
             console.log(error.message);
-            if (error.response && error.response.data) {
-                // toast.error(error.response.data.message);
-                console.log(error.response.data.message);
-            } else {
-                // toast.error(error.message);
-                console.log(error.message);
-            }
+            toast.error("Error in submitting the form");
         } finally {
             setLoading(false);
         }
@@ -59,14 +41,17 @@ const errhandle = (formFields) => {
         const event = formFields[eventId];
         for (const participant of event.participants) {
             if (participant.name.trim() === "" || participant.contact.trim() === "") {
-                console.log("Empty value not allowed");
+                toast.error("Please fill all the fields");
+                console.log("Please fill all the fields");
                 return false;
             }
             if (participant.name.trim() === "" || !/^[a-zA-Z0-9]+$/.test(participant.name)) {
+                toast.error("Name is not valid");
                 console.log("Name is not valid");
                 return false;
             }
             if (participant.contact.trim() === "" || !/^\d{10}$/.test(participant.contact)) {
+                toast.error("Contact is not valid");
                 console.log("Contact is not valid");
                 return false;
             }
@@ -74,6 +59,5 @@ const errhandle = (formFields) => {
     }
     return true
 };
-
 
 export default useSubmit;
