@@ -17,7 +17,7 @@ function useSubmit() {
         }
 
         try {
-            const response = await axios.post('api/user/register', { formFields });
+            const response = await axios.post('api/user/fest/register', { formFields });
 
             if (response.data.success) {
                 toast.success("Form submitted successfully")

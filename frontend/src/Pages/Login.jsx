@@ -1,7 +1,6 @@
-import Signup from "@/components/Login/Signup";
+import Signin from "@/components/Login/Signin";
 
 const Login = () => {
-
   return (
     <>
       <div>
