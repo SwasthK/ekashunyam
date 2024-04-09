@@ -8,6 +8,9 @@ import connectDB from "./config/database.js";
 import registerRoute from "./src/routes/register.routes.js";
 import loginRoute from "./src/routes/login.routes.js";
 import verifyTokenRoute from "./src/routes/verifyToken.routes.js";
+import festRoutes from "./src/routes/festRegistration.routes.js";
+
+//middleware imports
 import { auth } from "./src/middlewares/auth.js";
 
 // config
@@ -38,5 +41,6 @@ connectDB();
 app.use("/api/user/register", registerRoute);
 app.use("/api/user/login", loginRoute);
 app.use("/api/user/verify", verifyTokenRoute);
+app.use("/api/user/fest", auth, festRoutes);
 
 app.listen(port, () => console.log(`server running:http://localhost:${port}`));
