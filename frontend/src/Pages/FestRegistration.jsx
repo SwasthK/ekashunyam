@@ -19,6 +19,7 @@ const Registration = () => {
           toast.error("You are not authorized to view this page");
           navigate("/login");
         } else {
+          console.log("valid");
           setAuthenticated(true);
         }
       } catch (error) {
@@ -30,7 +31,7 @@ const Registration = () => {
       }
     };
     checkAuthentication();
-  }, []);
+  });
 
   return (
     <>

@@ -4,18 +4,17 @@ import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 
 function useSignin() {
-    const [loading, setLoading] = useState(false);
-    const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const signinverify = async ({ email, password }) => {
-        const pass = errhandle(email, password);
-        setLoading(true);
+  const signinverify = async ({ email, password }) => {
+    const pass = errhandle(email, password);
+    setLoading(true);
 
-        if (!pass) {
-            setLoading(false);
-            return;
-        }
-
+    if (!pass) {
+      setLoading(false);
+      return;
+    }
         try {
             const response = await axios.post('api/user/login', {
                 email,
@@ -39,7 +38,7 @@ function useSignin() {
         }
     };
 
-    return { loading, signinverify };
+  return { loading, signinverify };
 }
 
 function errhandle(email, password) {
