@@ -20,12 +20,13 @@ const port = process.env.PORT || 3000;
 //express middlewares
 app.use(
   cors({
-    origin: process.env.CORS_WHITELIST,
+    origin: `${process.env.CORS_WHITELIST}`,
     methods: "GET,POST",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -4,7 +4,7 @@ import { verifyToken } from "../utils/authentication.js";
 
 const handleVerifyToken = asyncHandler((req, res) => {
   const authorizationHeader = req.headers.authorization;
-  let token = null;
+  let token = req.cookies.accessToken;
   if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
     token = authorizationHeader.split("Bearer ")[1].trim();
   }
