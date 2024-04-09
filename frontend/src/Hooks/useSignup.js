@@ -4,17 +4,16 @@ import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 
 const colleges = [
-  "College A",
-  "College B",
-  "College C",
-  "College D",
-  "College E",
+    "College A",
+    "College B",
+    "College C",
+    "College D",
+    "College E",
 ];
 
 function useSignup() {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const signupverify = async ({ college, email, password, confirmpassword }) => {
 
         const pass = errhandle(college, email, password, confirmpassword);
