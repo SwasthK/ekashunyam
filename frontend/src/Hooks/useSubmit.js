@@ -27,6 +27,14 @@ function useSubmit() {
                 console.log(response.data.message);
             }
         } catch (error) {
+            if (error.response && error.response.status >= 500) {
+                console.log('Something went wrong!');
+                toast.error("Something went wrong!");
+            }
+            else {
+                console.log(error.response.data.message);
+                toast.error(error.response.data.message);
+            }
             console.log(error.message);
             toast.error("Error in submitting the form");
         } finally {

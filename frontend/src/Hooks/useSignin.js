@@ -21,18 +21,21 @@ function useSignin() {
         email,
         password,
       });
-      if (!response.data.success) {
-        toast.error(response.data.message);
-        console.log("Error: " + response.data.message);
-      } else if (response.data.success) {
-        toast.success(response.data.message);
-        console.log("Success: " + response.data.message);
-        navigate('/register')
-      }
+
+      toast.success(response.data.message);
+      console.log("Success: " + response.data.message);
+      navigate('/register')
+
     }
     catch (error) {
-      toast.error("Something went wrong!");
-      console.log(error.message);
+      if (error.response && error.response.status >= 500) {
+        console.log('Something went wrong!');
+        toast.error("Something went wrong!");
+      }
+      else {
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message);
+      }
     }
     finally {
       setLoading(false);
