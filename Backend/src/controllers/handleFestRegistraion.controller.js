@@ -29,10 +29,9 @@ const handleFestRegistration = asyncHandler(async (req, res) => {
       photoAndVideo,
       cultural,
     });
-    res.json(new ApiResponse(201, "Registration Successful", data));
-    console.log(cultural);
+    res.status(201).json(new ApiResponse(201, "Registration Successful", data));
   } catch (err) {
-    res.json(new ApiError(500, "Registration Failed", err.message));
+    res.status(500).json(new ApiError(500, "Registration Failed", err.message));
     console.log(err);
   }
 });
