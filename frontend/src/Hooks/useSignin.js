@@ -21,7 +21,8 @@ function useSignin() {
         email,
         password,
       });
-
+  
+      
       toast.success(response.data.message);
       console.log("Success: " + response.data.message);
       navigate('/register')
@@ -33,8 +34,8 @@ function useSignin() {
         toast.error("Something went wrong!");
       }
       else {
-        console.log(error.response.data.message);
-        toast.error(error.response.data.message);
+        console.log(error.message);
+        toast.error("An error occurred ! While logging in");
       }
     }
     finally {
