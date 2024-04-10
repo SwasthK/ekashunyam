@@ -1,7 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import 'react-toastify/dist/ReactToastify.css'; */
+
+
+@font-face {
+  font-family: 'Megatron-rAo9';
+  src: url('./static/fonts/Megatron-rAo9.ttf');
+}
+
+@font-face {
+  font-family: 'Gilroy-ExtraBold';
+  src: url('./static//fonts/Gilroy-ExtraBold.otf');
+}
+
+
 
 @layer base {
   :root {
