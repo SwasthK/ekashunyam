@@ -28,113 +28,145 @@ const Signup = () => {
 
   return (
     <>
-      {loading ? (
-        <div>Loading...</div>
-      ) : !loginmode ? (
-        <form onSubmit={handlesignup} className="max-w-sm mx-auto flex-cols">
-          <div className="mb-5">
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Your college name
-            </label>
-            <select
-              id="college"
-              value={signupcontent.college}
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              onChange={(e) =>
-                setsignupcontent({ ...signupcontent, college: e.target.value })
-              }
-            >
-              <option value="">Select your college</option>
-              {colleges.map((college, index) => (
-                <option key={index} value={college}>
-                  {college}
-                </option>
-              ))}
-            </select>
+      {!loginmode ? (
+      <>
+        {loading ? (
+          <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+            <div class="flex space-x-2 justify-center items-center bg-black p-6 rounded-lg shadow-lg">
+              <div class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]  ease-in-out"></div>
+              <div class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s] ease-in-out"></div>
+              <div class="h-8 w-8 bg-white rounded-full animate-bounce ease-in-out "></div>
+            </div>
           </div>
-          <div className="mb-5">
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Your email
-            </label>
-            <input
-              type="text"
-              id="email"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              placeholder="Enter your email"
-              value={signupcontent.email}
-              //   required
-              onChange={(e) =>
-                setsignupcontent({ ...signupcontent, email: e.target.value })
-              }
-            />
+        ) : null}
+        <div className="bg-black w-screen flex lg:justify-center lg:items-center lg:h-screen">
+          <div className="flex flex-col lg:flex-row lg:items-center xl:w-3/4 lg:w-[90vw] lg:h-3/4 lg:rounded-xl w-screen">
+            <div className="bg-gray-500 h-80 bg-bottom bg-cover bg-[url('/src/Public/2.jpg')] lg:h-full lg:w-3/4 lg:rounded-xl "></div>
+            <div className="px-16 py-14 lg:h-screen lg:w-full lg:pt-16">
+              <form
+                onSubmit={handlesignup}
+                className="max-w-sm mx-auto flex-cols"
+              >
+                <h1 className="text-2xl font-semibold text-gray-100">
+                  Register with your e-mail
+                </h1>
+                <div className="mb-5">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-white mt-8"
+                  >
+                    Your college name
+                  </label>
+                  <select
+                    id="college"
+                    value={signupcontent.college}
+                    className="shadow-sm px-6 bg-black mt-6 text-sm block w-full p-2.5 border-b-[1px] text-white outline-none pb-4 appearance-none"
+                    onChange={(e) =>
+                      setsignupcontent({
+                        ...signupcontent,
+                        college: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="" className="font-semibold text-[17px]">
+                      Select your college
+                    </option>
+                    {colleges.map((college, index) => (
+                      <option key={index} value={college} className="">
+                        {college}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-5">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-white mt-8"
+                  >
+                    Your email
+                  </label>
+                  <input
+                    type="text"
+                    id="email"
+                    className="shadow-sm px-6 bg-black mt-6 text-sm block w-full p-2.5 border-b-[1px] text-white outline-none pb-4 appearance-none"
+                    placeholder="Enter your email"
+                    value={signupcontent.email}
+                    //   required
+                    onChange={(e) =>
+                      setsignupcontent({
+                        ...signupcontent,
+                        email: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-5">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-white mt-8"
+                  >
+                    Your password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    className="shadow-sm px-6 bg-black mt-6 text-sm block w-full p-2.5 border-b-[1px] text-white outline-none pb-4 appearance-none"
+                    placeholder="Enter your password"
+                    value={signupcontent.password}
+                    //   required
+                    onChange={(e) =>
+                      setsignupcontent({
+                        ...signupcontent,
+                        password: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-5">
+                  <label
+                    htmlFor="repeat-password"
+                    className="block text-sm font-medium text-white mt-8"
+                  >
+                    Repeat password
+                  </label>
+                  <input
+                    type="password"
+                    id="repeat-password"
+                    className="shadow-sm px-6 bg-black mt-6 text-sm block w-full p-2.5 border-b-[1px] text-white outline-none pb-4 appearance-none"
+                    placeholder="Confirm password"
+                    value={signupcontent.confirmpassword}
+                    //   required
+                    onChange={(e) =>
+                      setsignupcontent({
+                        ...signupcontent,
+                        confirmpassword: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="text-black bg-white w-full py-2.5 rounded-lg mt-6 hover:bg-slate-200 text-base font-semibold mb-6"
+                >
+                  Register now
+                </button>
+                <div className="flex items-center gap-1">
+                  <p className="ms-2 text-sm font-medium text-white">
+                    Already have an account ?{" "}
+                  </p>
+                  <p
+                    className="text-blue-600 hover:underline hover:cursor-pointer"
+                    onClick={() => setloginmode(true)}
+                  >
+                    login here
+                  </p>
+                </div>
+              </form>
+            </div>
           </div>
-          <div className="mb-5">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Your password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              placeholder="Enter your password"
-              value={signupcontent.password}
-              //   required
-              onChange={(e) =>
-                setsignupcontent({ ...signupcontent, password: e.target.value })
-              }
-            />
-          </div>
-          <div className="mb-5">
-            <label
-              htmlFor="repeat-password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Repeat password
-            </label>
-            <input
-              type="password"
-              id="repeat-password"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              placeholder="Confirm password"
-              value={signupcontent.confirmpassword}
-              //   required
-              onChange={(e) =>
-                setsignupcontent({
-                  ...signupcontent,
-                  confirmpassword: e.target.value,
-                })
-              }
-            />
-          </div>
-          <div className="flex mb-5 items-center gap-1">
-            <p className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Already have an account ?{" "}
-            </p>
-            <p
-              className="text-blue-600 hover:underline hover:cursor-pointer dark:text-blue-500"
-              onClick={() => setloginmode(true)}
-            >
-              login here
-            </p>
-          </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Register new account
-          </button>
-        </form>
-      ) : (
-        <Signin></Signin>
+        </div>
+      </>
+      ) : (<Signin></Signin>
       )}
     </>
   );
