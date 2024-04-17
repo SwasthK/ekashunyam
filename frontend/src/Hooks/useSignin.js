@@ -22,7 +22,6 @@ function useSignin() {
         password,
       });
 
-
       toast.success(response.data.message, {
         duration: 2000,
         position: 'top-center',
@@ -47,7 +46,7 @@ function useSignin() {
         console.log(error.message);
       }
       else {
-        console.log(error.response.data.message);
+        console.log("hello"+error.response.data.message);
         toast.error(error.response.data.message), {
           duration: 2000,
           position: 'top-center',
@@ -68,7 +67,6 @@ function errhandle(email, password) {
       duration: 2000,
       position: 'top-center',
     });
-    console.log("Please fill the fields !");
     return false;
   }
 
@@ -77,7 +75,6 @@ function errhandle(email, password) {
       duration: 2000,
       position: 'top-center',
     });
-    console.log("Password should have at least 6 characters");
     return false;
   }
 
@@ -87,7 +84,6 @@ function errhandle(email, password) {
       duration: 2000,
       position: 'top-center',
     });
-    console.log("Enter a valid email address");
     return false;
   }
   return true;

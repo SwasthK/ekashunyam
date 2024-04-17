@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import { ToastContainer } from "react-toastify";
 import "./index.css";
 import axios from "axios";
 import { Toaster, ToastBar } from "react-hot-toast";

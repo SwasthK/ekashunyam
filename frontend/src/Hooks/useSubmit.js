@@ -50,17 +50,14 @@ const errhandle = (formFields) => {
         for (const participant of event.participants) {
             if (participant.name.trim() === "" || participant.contact.trim() === "") {
                 toast.error("Please fill all the fields");
-                console.log("Please fill all the fields");
                 return false;
             }
             if (participant.name.trim() === "" || !/^[a-zA-Z0-9]+$/.test(participant.name)) {
                 toast.error("Name is not valid");
-                console.log("Name is not valid");
                 return false;
             }
             if (participant.contact.trim() === "" || !/^\d{10}$/.test(participant.contact)) {
                 toast.error("Contact is not valid");
-                console.log("Contact is not valid");
                 return false;
             }
         }

@@ -41,9 +41,17 @@
 
 // export default Home;
 
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "@/components/HomePage/Buttons/Button";
+import Marquee from "@/components/Additional/Marquee/Marquee";
+import Brochure from "@/components/Additional/Brochure/Brochure";
+import Footer from "@/components/Additional/Footer/Footer";
+// import ImgRender from "@/components/Additional/ImageRender/ImageRender";
+import Glass from "@/components/Additional/Glassmorphism/Glass";
+import Developers from "@/components/Additional/Developers/Developers";
+import Landing from "@/components/Additional/Landing/Landing";
+import Navbar from "@/components/Additional/Navbar/Navbar";
+import MyComponent from "@/components/Additional/Parralax/MyComponent";
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -77,11 +85,15 @@ const Home = () => {
   // }, []);
 
   return (
-    <>
-      <div className="bg-sky-500 h-screen flex border-2 flex-col items-center gap-20 p-10 justify-center">
-        <h1 className="text-8xl">Home Page</h1>
+    <div>
+      {/* <MyComponent /> */}
 
-        {/* {loading ? (
+      <Navbar></Navbar>
+      <Landing></Landing>
+
+      {/* ---------------just for the testing purpose------------ */}
+
+      {/* {loading ? (
           <p>Loading...</p>
         ) : isAuthenticated ? (
           <Button text={"Edit"} click={"/register"}></Button>
@@ -89,9 +101,15 @@ const Home = () => {
           <Button text={"Register"} click={"/login"}></Button>
         )} */}
 
-        <Button text={"Register"} click={"/register"}></Button>
-      </div>
-    </>
+      {/* --------------------------------- ------------------------*/}
+      {/* <ImgRender /> */}
+
+      <Glass />
+      <Brochure />
+      <Marquee />
+      <Developers />
+      <Footer />
+    </div>
   );
 };
 
