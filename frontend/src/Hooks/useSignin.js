@@ -22,8 +22,10 @@ function useSignin() {
         password,
       });
 
-
-      toast.success(response.data.message);
+      toast.success(response.data.message, {
+        duration: 2000,
+        position: 'top-center',
+      });
       console.log("Success: " + response.data.message);
       navigate('/register')
 
@@ -31,15 +33,24 @@ function useSignin() {
     catch (error) {
       if (error.response && error.response.status >= 500) {
         console.log('Something went wrong!');
-        toast.error("Something went wrong!");
+        toast.error("Something went wrong!", {
+          duration: 2000,
+          position: 'top-center',
+        });
       }
       else if (error.message) {
-        toast.error(error.message);
+        toast.error(error.message, {
+          duration: 2000,
+          position: 'top-center',
+        });
         console.log(error.message);
       }
       else {
-        console.log(error.response.data.message);
-        toast.error(error.response.data.message);
+        console.log("hello"+error.response.data.message);
+        toast.error(error.response.data.message), {
+          duration: 2000,
+          position: 'top-center',
+        };
       }
     }
     finally {
@@ -52,21 +63,27 @@ function useSignin() {
 
 function errhandle(email, password) {
   if (!email || !password) {
-    toast.error("Please fill the fields !");
-    console.log("Please fill the fields !");
+    toast.error("Please fill all the fields !", {
+      duration: 2000,
+      position: 'top-center',
+    });
     return false;
   }
 
   if (password.length < 6) {
-    toast.error("Password should have at least 6 characters");
-    console.log("Password should have at least 6 characters");
+    toast.error("Password should have at least 6 characters", {
+      duration: 2000,
+      position: 'top-center',
+    });
     return false;
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    toast.error("Enter a valid email address");
-    console.log("Enter a valid email address");
+    toast.error("Enter a valid email address", {
+      duration: 2000,
+      position: 'top-center',
+    });
     return false;
   }
   return true;

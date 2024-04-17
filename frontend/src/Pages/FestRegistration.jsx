@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Form from "@/components/FesRegistration/Form";
 import toast from "react-hot-toast";
+import Loader from "@/components/Loader/Loader";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(false);
+  const [isregistered, setisregistered] = useState(false);
   const [loading, setloading] = useState(true);
 
   //check if the user is authenticated
@@ -18,9 +20,9 @@ const Registration = () => {
         if (!response.data.success) {
           toast.error("You are not authorized to view this page");
           navigate("/login");
-        } else {
-          console.log("valid");
+        } else {  
           setAuthenticated(true);
+          setisregistered(response.data.isregistered);
         }
       } catch (error) {
         toast.error("Error in authorizing the user");
@@ -36,9 +38,11 @@ const Registration = () => {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <div className="bg-black w-screen h-screen">
+          <Loader />
+        </div>
       ) : authenticated ? (
-        <Form />
+        <Form isregisterd={isregistered} />
       ) : (
         navigate("/login")
       )}

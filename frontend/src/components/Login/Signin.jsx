@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import useSignin from "@/Hooks/useSignin";
 import Signup from "./Signup";
+import Loader from "../Loader/Loader";
 
 const Signin = () => {
   const { loading, signinverify } = useSignin();
@@ -20,21 +21,13 @@ const Signin = () => {
     <>
       {loginmode ? (
         <>
-          {loading ? (
-            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-              <div class="flex space-x-2 justify-center items-center bg-black p-6 rounded-lg shadow-lg">
-                <div class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]  ease-in-out"></div>
-                <div class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s] ease-in-out"></div>
-                <div class="h-8 w-8 bg-white rounded-full animate-bounce ease-in-out "></div>
-              </div>
-            </div>
-          ) : null}
+          {loading ? <Loader /> : null}
           <div className="bg-black w-screen flex lg:justify-center lg:items-center lg:h-screen">
             <div className="flex flex-col lg:flex-row lg:items-center xl:w-3/4 lg:w-[90vw] lg:h-3/4 lg:rounded-xl w-screen ">
-              <div className="bg-gray-500 h-80 bg-bottom bg-cover bg-[url('/src/Public/3.jpeg')] lg:h-full lg:w-3/4 lg:rounded-xl animate-pulse duration-[4000]"></div>
+              <div className="bg-gray-500 h-80 bg-bottom bg-cover bg-[url('/src/Public/Images/Login_Page/1.jpeg')] lg:h-full lg:w-3/4 lg:rounded-xl animate-pulse duration-[4000]"></div>
               <div className="px-16 py-14 lg:h-screen lg:w-full lg:pt-48 sm:text-center">
                 <h1 className="sm:text-3xl text-[4.99vw] text-yellow-500 font-megatron ">
-                Back again ? log in now !
+                  Back again ? log in now !
                 </h1>
                 <form
                   onSubmit={handlesignin}
